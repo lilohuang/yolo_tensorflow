@@ -2,7 +2,7 @@ import os
 import xml.etree.ElementTree as ET
 import numpy as np
 import cv2
-import cPickle
+import _pickle as cPickle
 import copy
 import yolo.config as cfg
 
@@ -16,7 +16,7 @@ class pascal_voc(object):
         self.image_size = cfg.IMAGE_SIZE
         self.cell_size = cfg.CELL_SIZE
         self.classes = cfg.CLASSES
-        self.class_to_ind = dict(zip(self.classes, xrange(len(self.classes))))
+        self.class_to_ind = dict(zip(self.classes, range(len(self.classes))))
         self.flipped = cfg.FLIPPED
         self.phase = phase
         self.rebuild = rebuild
@@ -59,8 +59,8 @@ class pascal_voc(object):
             for idx in range(len(gt_labels_cp)):
                 gt_labels_cp[idx]['flipped'] = True
                 gt_labels_cp[idx]['label'] = gt_labels_cp[idx]['label'][:, ::-1, :]
-                for i in xrange(self.cell_size):
-                    for j in xrange(self.cell_size):
+                for i in range(self.cell_size):
+                    for j in range(self.cell_size):
                         if gt_labels_cp[idx]['label'][i, j, 0] == 1:
                             gt_labels_cp[idx]['label'][i, j, 1] = self.image_size - 1 - gt_labels_cp[idx]['label'][i, j, 1]
             gt_labels += gt_labels_cp

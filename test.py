@@ -27,7 +27,7 @@ class Detector(object):
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
 
-        print 'Restoring weights from: ' + self.weights_file
+        print('Restoring weights from: ' + self.weights_file)
         self.saver = tf.train.Saver()
         self.saver.restore(self.sess, self.weights_file)
 
